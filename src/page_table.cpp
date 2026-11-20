@@ -1,17 +1,14 @@
 #include "page_table.h"
 
-#include <cstddef>
 #include <iomanip>
-#include <limits>
 #include <sstream>
 #include <stdexcept>
 #include <string>
 
-namespace {
-
-int readInteger(std::istream& input, std::ostream& output,
-                const char* prompt, int minimum, int maximum) {
-    for (;;) {
+// Doc ca dong de tranh nhan nham du lieu nhu "2abc" hoac "1 2".
+static int readNonNegativeInteger(std::istream& input, std::ostream& output,
+                                  const char* prompt) {
+    while (true) {
         output << prompt;
         std::string line;
         if (!std::getline(input, line)) {
@@ -20,43 +17,50 @@ int readInteger(std::istream& input, std::ostream& output,
 
         std::istringstream parser(line);
         int value = 0;
-        if ((parser >> value) && (parser >> std::ws).eof() &&
-            value >= minimum && value <= maximum) {
+        if ((parser >> value) && value >= 0 && (parser >> std::ws).eof()) {
             return value;
         }
-        output << "Loi: nhap mot so nguyen tu " << minimum << " den "
-               << maximum << ". Hay nhap lai.\n";
+        output << "Loi: can mot so nguyen khong am hop le. Hay nhap lai.\n";
     }
 }
 
-} // namespace
-
 PageTable loadPageTable(std::istream& input, std::ostream& output) {
-    // Also work after a menu has read its choice using operator>>.
+    // Bo dau xuong dong con lai neu menu vua nhap bang cin >>.
     input >> std::ws;
-    const int count = readInteger(input, output, "Nhap so page: ", 0,
-                                 std::numeric_limits<int>::max());
-    PageTable table(static_cast<std::size_t>(count));
-    std::vector<bool> entered(static_cast<std::size_t>(count), false);
+    int count = readNonNegativeInteger(input, output, "Nhap so page: ");
+    PageTable table(count);
+    std::vector<bool> entered(count, false);
 
     for (int index = 0; index < count; ++index) {
         output << "Entry " << index + 1 << "/" << count << ":\n";
         int page = 0;
-        for (;;) {
-            page = readInteger(input, output, "  Page: ", 0, count - 1);
-            if (!entered[static_cast<std::size_t>(page)]) {
-                break;
+        while (true) {
+            page = readNonNegativeInteger(input, output, "  Page: ");
+            if (page >= count) {
+                output << "Loi: page phai tu 0 den " << count - 1 << ".\n";
+                continue;
             }
-            output << "Loi: page " << page << " da duoc nhap. Hay nhap page khac.\n";
+            if (entered[page]) {
+                output << "Loi: page " << page << " da duoc nhap. Hay nhap page khac.\n";
+                continue;
+            }
+            break;
         }
 
+        int frame = readNonNegativeInteger(input, output, "  Frame: ");
+        int valid = readNonNegativeInteger(input, output, "  Valid (0/1): ");
+        while (valid > 1) {
+            output << "Loi: valid chi nhan 0 hoac 1.\n";
+            valid = readNonNegativeInteger(input, output, "  Valid (0/1): ");
+        }
+
+        // Chi luu khi da nhap du ba gia tri hop le.
         PageTableEntry entry;
         entry.page = page;
-        entry.frame = readInteger(input, output, "  Frame: ", 0,
-                                  std::numeric_limits<int>::max());
-        entry.valid = readInteger(input, output, "  Valid (0/1): ", 0, 1) == 1;
-        table[static_cast<std::size_t>(page)] = entry;
-        entered[static_cast<std::size_t>(page)] = true;
+        entry.frame = frame;
+        entry.valid = (valid == 1);
+        table[page] = entry;
+        entered[page] = true;
     }
     return table;
 }

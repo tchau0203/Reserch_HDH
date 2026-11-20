@@ -58,6 +58,6 @@ Với một lượt nhập hợp lệ ngay, phần nhập và in đều có th�
 
 ## Contribution statement
 
-Nguyễn Việt Hoàng phụ trách cấu trúc bảng trang, hàm nhập page/frame/valid bit, kiểm tra dữ liệu và hàm in bảng. Phần đóng góp có chương trình demo riêng, dữ liệu mẫu, hướng dẫn ghép hàm và hai slide trình bày. Code được hỗ trợ soạn thảo và kiểm tra bằng OpenAI Codex. Người nộp cần đọc hiểu và tự chạy lại trước khi trình bày.
+Nguyễn Việt Hoàng phụ trách cấu trúc bảng trang, hàm nhập page/frame/valid bit, kiểm tra dữ liệu và hàm in bảng. Phần đóng góp trong repo có chương trình demo riêng, dữ liệu mẫu và hướng dẫn ghép hàm. Code được hỗ trợ soạn thảo và kiểm tra bằng OpenAI Codex. Người nộp cần đọc hiểu và tự chạy lại trước khi trình bày.
 
 Nguồn yêu cầu là `PhanCong_DonGian.docx` và `2627_0101_Research_Requirement` được chia sẻ trong nhóm Zalo GR12 Hệ điều hành. Dữ liệu mẫu dùng page 2 → frame 7 theo ví dụ của PDF yêu cầu.

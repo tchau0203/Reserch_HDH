@@ -10,11 +10,11 @@ struct PageTableEntry {
     bool valid = false;
 };
 
-// Pages are numbered from 0 to table.size() - 1; table[p] describes page p.
+// Page danh so tu 0. table[p] luu thong tin cua page p.
 using PageTable = std::vector<PageTableEntry>;
 
-// Read count, then page/frame/valid for each entry. Invalid input is retried.
-// End of input throws std::runtime_error; no partially filled table is returned.
+// Nhap so page, sau do nhap page, frame va valid cua tung dong.
+// Neu het dau vao giua chung, ham bao loi bang std::runtime_error.
 PageTable loadPageTable(std::istream& input = std::cin,
                         std::ostream& output = std::cout);
 
