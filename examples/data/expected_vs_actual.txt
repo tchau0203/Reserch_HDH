@@ -1,0 +1,9 @@
+LA | expected | actual | ket luan
+37 | OK 117 | OK 117 | PASS
+20 | OK 52 | OK 52 | PASS
+5 | OK 85 | OK 85 | PASS
+16 | OK 48 | OK 48 | PASS
+31 | OK 63 | OK 63 | PASS
+64 | OUT_OF_RANGE - | OUT_OF_RANGE - | PASS
+48 | PAGE_FAULT - | PAGE_FAULT - | PASS
+63 | PAGE_FAULT - | PAGE_FAULT - | PASS
