@@ -12,6 +12,5 @@ if %ERRORLEVEL% NEQ 0 (
 echo [SUCCESS] Bien dich thanh cong! File thuc thi: main.exe
 echo.
 echo De chay chuong trinh:
-echo   main.exe                (Chay giao dien Menu tuong tac)
-echo   main.exe --test         (Chay kiem thu 8 test cases mau)
+echo   main.exe
 echo.
