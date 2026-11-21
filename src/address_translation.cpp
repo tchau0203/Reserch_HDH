@@ -1,4 +1,4 @@
-#include "translate.h"
+#include "address_translation.h"
 using namespace std;
 
 int translate(int LA, int P, const PageTable& table, int &PA, ostream &out) {
