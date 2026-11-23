@@ -106,9 +106,9 @@ Chon chuc nang (0-5):
 ### Các chức năng chính:
 
 - **Chức năng 1:** Cài đặt kích thước trang $P$ (ví dụ: 16 bytes, 4096 bytes,...).
-- **Chức năng 2:** Gọi hàm `loadPageTable` (Hoàng) để nhập số lượng trang và từng entry (page, frame, valid bit).
-- **Chức năng 3:** Gọi hàm `printPageTable` (Hoàng) để xuất bảng trang hiện tại ra màn hình.
-- **Chức năng 4:** Nhập 1 địa chỉ logic $LA$, gọi `translate` (Tuấn) để in toàn bộ trace các bước $B_1 \rightarrow B_6$ và kết quả $PA$ (hoặc báo lỗi tương ứng).
+- **Chức năng 2:** Gọi hàm `loadPageTable` để nhập số lượng trang và từng entry (page, frame, valid bit).
+- **Chức năng 3:** Gọi hàm `printPageTable` để xuất bảng trang hiện tại ra màn hình.
+- **Chức năng 4:** Nhập 1 địa chỉ logic $LA$, gọi hàm `translate` để in toàn bộ trace các bước $B_1 \rightarrow B_6$ và kết quả $PA$ (hoặc báo lỗi tương ứng).
 - **Chức năng 5:** Dịch danh sách nhiều địa chỉ logic cùng lúc và hiển thị bảng kết quả tổng hợp.
 
 ---

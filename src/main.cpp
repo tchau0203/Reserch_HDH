@@ -23,7 +23,7 @@ int main() {
     PageTable table;
     bool hasTable = false;
 
-    cout << "\nChuong trinh rap noi module Page Table (Hoang) va Address Translation (Tuan).\n";
+    cout << "\nChuong trinh mo phong Page Table va Address Translation.\n";
 
     while (true) {
         cout << "\n----------------------- MENU CHINH ---------------------------\n";
