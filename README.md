@@ -19,64 +19,9 @@ Mục tiêu của đề tài:
 
 ---
 
-## 2. Bảng phân công nhiệm vụ nhóm (OS_26277105_12)
+## 2. Cơ sở lý thuyết và Giải thuật dịch địa chỉ
 
-Theo bảng phân công `PhanCong_DonGian.docx`:
-
-| Thành viên | Việc cần làm | Hạn |
-| :--- | :--- | :---: |
-| **Minh (nhóm trưởng)** | Viết giả định + lý thuyết paging, tìm 4 tài liệu tham khảo, nhắc tiến độ | 20/11 |
-| **Hoàng** | Code phần nhập page table (page, frame, valid bit) và in bảng | 20/11 |
-| **Tuấn** | Code hàm dịch địa chỉ (6 bước, có trace), pseudocode, độ phức tạp | 20/11 |
-| **Châu** | Ráp code thành chương trình chạy được, README, gom báo cáo PDF | 22/11 |
-| **Sơn** | Làm 8 test case, tính tay để kiểm chứng, ghi pass/fail | 21/11 |
-| **Cả nhóm** | Mỗi người 2 slide phần mình, đọc lại bài, viết contribution statement | 23/11 |
-
-> **Lưu ý:** Nộp code qua Pull Request, không đẩy code lỗi lên `main`.
-
----
-
-## 3. Cấu trúc thư mục dự án
-
-```text
-Reserch_HDH/
-│
-├── include/                          # Header files
-│   ├── page_table.h                  # Khai báo cấu trúc PageTable và các hàm nhập/xuất (Hoàng)
-│   ├── address_translation.h         # Khai báo hàm translate và các mã trạng thái (Tuấn)
-│   └── translate.h                   # Header wrapper tương thích ngược (Châu)
-│
-├── src/                              # Mã nguồn chương trình
-│   ├── page_table.cpp                # Hiện thực loadPageTable, printPageTable (Hoàng)
-│   ├── address_translation.cpp       # Hiện thực giải thuật translate 6 bước (Tuấn)
-│   └── main.cpp                      # Chương trình chính ráp nối toàn bộ hệ thống (Châu)
-│
-├── examples/                         # Ví dụ và kiểm thử
-│   ├── hoang_page_table_demo.cpp     # Demo kiểm tra riêng phần Page Table của Hoàng
-│   ├── page_table_input.txt          # Dữ liệu nhập mẫu cho phần demo của Hoàng
-│   ├── run_from_files.cpp            # Demo chạy dịch theo tệp tin
-│   └── check_independent.cpp         # Chương trình kiểm chứng độc lập (Sơn)
-│
-├── docs/                             # Tài liệu học thuật và báo cáo
-│   ├── hoang-page-table.md           # Báo cáo phần Hoàng
-│   ├── translate_algorithm.md        # Tài liệu giải thuật dịch địa chỉ (Tuấn)
-│   ├── translate_complexity.md       # Phân tích độ phức tạp O(1) (Tuấn)
-│   ├── translate_trace.md            # Các trace mẫu (Tuấn)
-│   ├── translate_run_and_test.md     # Hướng dẫn chạy & bộ test (Tuấn/Sơn)
-│   └── Tuan_phan_bao_cao (1).docx    # Báo cáo gốc dạng Word của Tuấn
-│
-├── CMakeLists.txt                    # Cấu hình biên dịch CMake
-├── Makefile                          # Cấu hình biên dịch Make
-├── build.bat                         # Script biên dịch nhanh trên Windows (Châu)
-├── .gitignore                        # Bỏ qua các file thực thi và file build
-└── README.md                         # Hướng dẫn dự án (Châu)
-```
-
----
-
-## 4. Cơ sở lý thuyết và Giải thuật dịch địa chỉ
-
-### 4.1. Ký hiệu và quy ước
+### 2.1. Ký hiệu và quy ước
 - **$LA$ (Logical Address):** Địa chỉ logic do CPU phát ra (đơn vị: byte).
 - **$P$ (Page Size):** Kích thước của một trang và một khung trang (đơn vị: byte, là lũy thừa của 2).
 - **$p$ (Page Number):** Số hiệu trang, dùng làm chỉ số tra cứu vào Page Table.
@@ -85,7 +30,7 @@ Reserch_HDH/
 - **$PA$ (Physical Address):** Địa chỉ vật lý sau khi dịch ($PA = f \times P + d$).
 - **$PTLR$ (Page-Table Length Register):** Số lượng phần tử trong bảng trang (`table.size()`).
 
-### 4.2. Các bước thực hiện của giải thuật (`translate`)
+### 2.2. Các bước thực hiện của giải thuật (`translate`)
 Hàm `translate` thực hiện dịch địa chỉ qua các bước:
 1. **Kiểm tra đầu vào:** Nếu $LA < 0$ hoặc $P \le 0 \Rightarrow$ Báo lỗi `INVALID_INPUT`.
 2. **Tách địa chỉ logic:**
@@ -97,23 +42,23 @@ Hàm `translate` thực hiện dịch địa chỉ qua các bước:
 
 ---
 
-## 5. Hướng dẫn biên dịch và Chạy chương trình
+## 3. Hướng dẫn biên dịch và Chạy chương trình
 
 ### Yêu cầu môi trường
 - Trình biên dịch C++ hỗ trợ **C++17** trở lên (`g++`, `clang++`, hoặc MSVC).
 
-### 5.1. Biên dịch nhanh bằng `build.bat` (Windows)
+### 3.1. Biên dịch nhanh bằng `build.bat` (Windows)
 Mở Command Prompt hoặc PowerShell tại thư mục `Reserch_HDH`:
 ```bat
 .\build.bat
 ```
 
-### 5.2. Biên dịch bằng `g++` trực tiếp
+### 3.2. Biên dịch bằng `g++` trực tiếp
 ```bash
 g++ -std=c++17 -Wall -Wextra -Iinclude src/main.cpp src/page_table.cpp src/address_translation.cpp -o main.exe
 ```
 
-### 5.3. Biên dịch bằng `Make`
+### 3.3. Biên dịch bằng `Make`
 ```bash
 make        # Biên dịch main.exe và hoang_demo.exe
 make clean  # Xóa các file thực thi
@@ -121,7 +66,7 @@ make clean  # Xóa các file thực thi
 
 ---
 
-## 6. Hướng dẫn sử dụng chương trình chính (`main.cpp`)
+## 4. Hướng dẫn sử dụng chương trình chính (`main.cpp`)
 
 Khởi động chương trình:
 ```bash
@@ -156,6 +101,6 @@ Chon chuc nang (0-5):
 
 ---
 
-## 7. Phần kiểm thử (Testing)
+## 5. Phần kiểm thử (Testing)
 
 Theo phân công trong nhóm, **Sơn** phụ trách xây dựng bộ 8 test case kiểm chứng, tính tay đối chiếu lý thuyết và ghi nhận kết luận pass/fail (sẽ được nộp qua nhánh / Pull Request riêng của Sơn).
